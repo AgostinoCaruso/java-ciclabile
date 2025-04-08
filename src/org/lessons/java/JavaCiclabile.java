@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class JavaCiclabile {
 
-    private int[] arrayIntero = { 1, 2, 3, 4 };
+    private int[] arrayIntero = {};
     private int indiceCorrenteArray = 0;
     Scanner scan = new Scanner(System.in);
 
     public JavaCiclabile() {
         // qui dentro deve starci una funzione che aggiunga un elemento all'array
-        addElemento();
+        this.arrayIntero = new int[0];
     }
 
     public JavaCiclabile(int[] array) {
