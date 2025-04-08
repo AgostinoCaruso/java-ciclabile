@@ -5,9 +5,8 @@ import java.util.Scanner;
 public class JavaCiclabile {
 
     private int[] arrayIntero = { 1, 2, 3, 4 };
-    private int numeroCicloIterato = 0;
+    private int indiceCorrenteArray = 0;
     Scanner scan = new Scanner(System.in);
-
 
     public JavaCiclabile() {
         // qui dentro deve starci una funzione che aggiunga un elemento all'array
@@ -15,35 +14,42 @@ public class JavaCiclabile {
     }
 
     public JavaCiclabile(int[] array) {
-        array = arrayIntero;
+        this.arrayIntero = array;
+        if (this.arrayIntero.length > 0)
+            this.indiceCorrenteArray = 0;
     }
 
     // get&set
     public int[] GetArrayIntero() {
-        return arrayIntero;
+        return this.arrayIntero;
     }
 
     public int GetNumeroIterato() {
-        return numeroCicloIterato;
+        return this.indiceCorrenteArray;
     }
 
     // metodi
-    public int GetElementoSuccessivo(int[] arrayIntero) {
-        // deve tornare l elemento succesivo dell'array, tenendo conto dell'inidice ad
-        // ogni invocazione
-        int elementoCorrente = numeroCicloIterato;
-        return 0;
+    public int GetElementoSuccessivo() {
+        if (this.indiceCorrenteArray < this.arrayIntero.length) {
+            int elemento = this.arrayIntero[this.indiceCorrenteArray];
+            this.indiceCorrenteArray++;
+            return elemento;
+        } else {
+            this.indiceCorrenteArray = 0;
+            return -1;
+        }
+
     }
 
-    public boolean HasAncoraElementi(int numeroCicloIterato, int[] arrayIntero) {
-        if (numeroCicloIterato > arrayIntero.length)
+    public boolean HasAncoraElementi() {
+        if (this.indiceCorrenteArray >= this.arrayIntero.length)
             return false;
         return true;
     }
 
-    public void toStringArray(){
-        for(int ele : arrayIntero){
-            System.out.println("-"+ele);
+    public void toStringArray() {
+        for (int ele : this.arrayIntero) {
+            System.out.println("-" + ele);
         }
     }
 
@@ -52,11 +58,21 @@ public class JavaCiclabile {
         System.out.println("Scrivi il numero che vuoi aggiungere all'array: ");
         numeroDaAggiungere = scan.nextInt();
         System.out.println("---");
-        int[] arrayTemp = new int[arrayIntero.length + 1];
-        System.arraycopy(arrayIntero, 0, arrayTemp, 0, arrayIntero.length);
-        arrayTemp[arrayIntero.length] = numeroDaAggiungere;
+        int[] arrayTemp = new int[this.arrayIntero.length + 1];
 
-        //qua sovrascrivo l array vecchio con quello aggiornato
-        arrayIntero = arrayTemp;
+        // o cosi
+
+        // System.arraycopy(this.arrayIntero, 0, arrayTemp, 0, arrayIntero.length);
+        // arrayTemp[this.arrayIntero.length] = numeroDaAggiungere;
+
+        // o con un iterazione for
+
+        for (int i = 0; i < this.arrayIntero.length; i++) {
+            arrayTemp[i] = this.arrayIntero[i];
+        }
+        arrayTemp[this.arrayIntero.length] = numeroDaAggiungere;
+
+        // qua sovrascrivo l array vecchio con quello aggiornato
+        this.arrayIntero = arrayTemp;
     }
 }
